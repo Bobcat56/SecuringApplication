@@ -1,0 +1,19 @@
+﻿----------------------- Tasks -----------------------
+3.) Add Confirm Email function properly
+6.) The only users allowed to delete a listing are the employers who put it up, or if its an Admin or Manager
+7.) Add a page for users to see the cvs they have uploaded. 
+8.) Employers can see Cvs uploaded to their respective job
+
+-----------------------------------------------------
+
+---------------------- O Auth -----------------------
+App id: 01e441ee-d0e2-4c47-b8d9-94364465a262
+
+Secret Value: U6Z8Q~FfkX1q9tjH6TR4Y7EfZUTiqAi3ejEYDcgD
+Secret Key: e1e5100c-f6ee-440c-99f2-03d4f895c109
+-----------------------------------------------------
+
+------------------------ PMC ------------------------
+	PM> add-migration "nMigration"
+	PM> update-database
+-----------------------------------------------------
