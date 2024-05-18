@@ -80,15 +80,14 @@ namespace Presentation.Utilities
             msOut.Read(encryptedKey, 0, encryptedKey.Length);
             msOut.Read(encryptedIv, 0, encryptedIv.Length);
 
-            byte[] aesKey = AsymmetricDecrypt(encryptedKey, privateKey);
-            byte[] aesIv = AsymmetricDecrypt(encryptedIv, privateKey);
+            byte[] decryptedKey = AsymmetricDecrypt(encryptedKey, privateKey);
+            byte[] decryptedIv = AsymmetricDecrypt(encryptedIv, privateKey);
 
             Aes myAlg = Aes.Create();
-            myAlg.Key = aesKey;
-            myAlg.IV = aesIv;
+            myAlg.Key = decryptedKey;
+            myAlg.IV = decryptedIv;
 
             MemoryStream msIn = new MemoryStream();
-
             using (CryptoStream myCryptoStream = new CryptoStream(msOut, myAlg.CreateDecryptor(), CryptoStreamMode.Read))
             {
                 myCryptoStream.CopyTo(msIn);
