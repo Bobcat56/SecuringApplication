@@ -26,5 +26,7 @@ namespace Common.Models
         public required string EmployerId { get; set; }
         public virtual IdentityUser EmployerIdentity { get; set; }
 
+        public required byte[] DigtalSignature { get; set; }
+
     }
 }

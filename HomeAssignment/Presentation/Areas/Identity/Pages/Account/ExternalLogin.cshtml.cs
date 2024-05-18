@@ -17,6 +17,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Common.Models;
+using Microsoft.EntityFrameworkCore;
+using Presentation.Utilities;
+using DataAccess.Context;
 
 namespace Presentation.Areas.Identity.Pages.Account
 {
@@ -29,13 +33,15 @@ namespace Presentation.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly RecruitmentContext _context;
 
         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RecruitmentContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -43,6 +49,7 @@ namespace Presentation.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -164,6 +171,18 @@ namespace Presentation.Areas.Identity.Pages.Account
                     {
                         //Assigning the role Generic User
                         await _userManager.AddToRoleAsync(user, "Generic User");
+
+                        //Generate encryption keys
+                        var encryption = new Encryption();
+                        var keys = encryption.GenerateAysmmetricKeys();
+                        var encryptionKey = new EncryptionKey
+                        {
+                            UserId = await _userManager.GetUserIdAsync(user),
+                            PublicKey = keys.PublicKey,
+                            PrivateKey = keys.PrivateKey
+                        };
+                        _context.EncryptionKeys.Add(encryptionKey);
+                        await _context.SaveChangesAsync();
 
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 

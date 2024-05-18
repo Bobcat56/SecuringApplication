@@ -10,6 +10,8 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Models;
+using DataAccess.Context;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,7 +19,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Presentation.Utilities;
 
 namespace Presentation.Areas.Identity.Pages.Account
 {
@@ -29,13 +33,15 @@ namespace Presentation.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RecruitmentContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RecruitmentContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +49,7 @@ namespace Presentation.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -124,6 +131,18 @@ namespace Presentation.Areas.Identity.Pages.Account
 
                     //Assigning the role Generic User
                     await _userManager.AddToRoleAsync(user, "Generic User");
+
+                    //Generate encryption keys
+                    var encryption = new Encryption();
+                    var keys = encryption.GenerateAysmmetricKeys();
+                    var encryptionKey = new EncryptionKey
+                    {
+                        UserId = await _userManager.GetUserIdAsync(user),
+                        PublicKey = keys.PublicKey,
+                        PrivateKey = keys.PrivateKey
+                    };
+                    _context.EncryptionKeys.Add(encryptionKey);
+                    await _context.SaveChangesAsync();
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

@@ -60,6 +60,10 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<byte[]>("DigtalSignature")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("EmployerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -79,6 +83,24 @@ namespace DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CVs");
+                });
+
+            modelBuilder.Entity("Common.Models.EncryptionKey", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PrivateKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("EncryptionKeys");
                 });
 
             modelBuilder.Entity("Common.Models.Job", b =>
@@ -369,6 +391,17 @@ namespace DataAccess.Migrations
                     b.Navigation("EmployerIdentity");
 
                     b.Navigation("UserIdentity");
+                });
+
+            modelBuilder.Entity("Common.Models.EncryptionKey", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Common.Models.Job", b =>

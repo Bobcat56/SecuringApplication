@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Models;
+using Presentation.Utilities;
 
 namespace Presentation.Controllers
 {
@@ -12,15 +13,21 @@ namespace Presentation.Controllers
     public class CvController : Controller
     {
         private readonly CvRepository _cvRepository;
+        private readonly EncryptionKeyRepository _keyRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         //Controller
-        public CvController(CvRepository cvRepository ,UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
+        public CvController(
+            CvRepository cvRepository,
+            EncryptionKeyRepository keyRepository,
+            UserManager<IdentityUser> userManager, 
+            IWebHostEnvironment webHostEnvironment)
         {
             _cvRepository = cvRepository;
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
+            _keyRepository = keyRepository;
         }
 
         [HttpGet] //Fetch page for users submitted cvs
@@ -48,6 +55,7 @@ namespace Presentation.Controllers
                     var cvViewModel = new CvViewModel
                     {
                         Id = cv.Id,
+                        //Add decryption here to show proper file name
                         FileName = cv.FileName.Substring(37),
                         UserEmail = userEmail.Email,
                         EmployerEmail = employerEmail.Email
@@ -135,7 +143,7 @@ namespace Presentation.Controllers
                 return RedirectToAction("Index", "Jobs");
             }
 
-            //Get users ID and the save location
+            //Get user ID and the save location
             var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
@@ -157,11 +165,24 @@ namespace Presentation.Controllers
 
             try
             {
+                //Creating digital signature
+                byte[] fileBytes;
+                using (var ms = new MemoryStream())
+                {
+                    await cvFile.CopyToAsync(ms);
+                    fileBytes = ms.ToArray();
+                }
+
+                var e = new Encryption();
+                var userPrivateKey = _keyRepository.GetKeyById(user.Id);
+                byte[] signature = e.DigitalSign(fileBytes, userPrivateKey.PrivateKey);
+
                 CV cv = new CV()
                 {
                     FileName = uniqueFileName,
                     UserId = user.Id,
-                    EmployerId = employerId
+                    EmployerId = employerId,
+                    DigtalSignature = signature,
                 };
 
                 //Save cv
@@ -237,7 +258,7 @@ namespace Presentation.Controllers
             if (cv == null)
             {
                 TempData["ErrorMessage"] = "An error occurd while downloading file";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("EmployerCvs", "Cv");
             }
 
             var uploadsFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "Data");
@@ -246,10 +267,22 @@ namespace Presentation.Controllers
             if (!System.IO.File.Exists(pathToCv))
             {
                 TempData["ErrorMessage"] = "File does not exist.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("EmployerCvs", "Cv");
             }
 
+            //Validating Digital Signature
             byte[] fileAsBytes = System.IO.File.ReadAllBytes(pathToCv);
+
+            var e = new Encryption();
+            var userKey = _keyRepository.GetKeyById(cv.UserId);
+
+            bool verifySignature = e.DigitalVerification(fileAsBytes, cv.DigtalSignature, userKey.PublicKey);
+            if (!verifySignature) 
+            {
+                TempData["ErrorMessage"] = "File signature could not be verified.";
+                return RedirectToAction("EmployerCvs", "Cv");
+            }
+
             string fileName = cv.FileName.Substring(37);
 
             return File(fileAsBytes, "application/octet-stream", fileName);

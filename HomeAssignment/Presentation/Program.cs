@@ -1,7 +1,9 @@
+using Common.Models;
 using DataAccess.Context;
 using DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Utilities;
 
 namespace Presentation
 {
@@ -46,6 +48,7 @@ namespace Presentation
 
             builder.Services.AddScoped<JobRepository>();
             builder.Services.AddScoped<CvRepository>();
+            builder.Services.AddScoped<EncryptionKeyRepository>();
 
             var app = builder.Build();
 
@@ -86,7 +89,10 @@ namespace Presentation
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-                string[] roleNames = { "Admin", "Employer", "IT Employee", "Manager", "Generic User" };
+                var context = scope.ServiceProvider.GetRequiredService<RecruitmentContext>();
+                var encryption = new Encryption();
+
+                string[] roleNames = { "Admin", "Employer", "IT Employee", "Employee", "Manager", "Generic User" };
                 IdentityResult roleResult;
 
                 foreach (var roleName in roleNames)
@@ -100,7 +106,7 @@ namespace Presentation
                 }
 
                 // Create admin account
-                var powerUser = new IdentityUser
+                var adminUser = new IdentityUser
                 {
                     UserName = "admin@gmail.com",
                     Email = "admin@gmail.com",
@@ -112,14 +118,26 @@ namespace Presentation
 
                 if (user == null)
                 {
-                    var createPowerUser = await userManager.CreateAsync(powerUser, "Admin_123");
-                    if (createPowerUser.Succeeded)
+                    var createAdminUser = await userManager.CreateAsync(adminUser, "Admin_123");
+                    if (createAdminUser.Succeeded)
                     {
                         // Here we assign the admin role to the user
-                        await userManager.AddToRoleAsync(powerUser, "Admin");
+                        await userManager.AddToRoleAsync(adminUser, "Admin");
+
+                        // Generate and save encryption keys
+                        var keys = encryption.GenerateAysmmetricKeys();
+                        var encryptionKey = new EncryptionKey
+                        {
+                            UserId = adminUser.Id,
+                            PublicKey = keys.PublicKey,
+                            PrivateKey = keys.PrivateKey
+                        };
+                        context.EncryptionKeys.Add(encryptionKey);
+                        await context.SaveChangesAsync();
                     }
                 }
             }
-        }
+        }//Close admin creation class
+
     }
 }
