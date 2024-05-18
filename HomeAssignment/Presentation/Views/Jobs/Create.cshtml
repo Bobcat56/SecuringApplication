@@ -6,7 +6,6 @@
 
 <h1>Add Job Listing</h1>
 
-<h4>JobViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,10 +26,10 @@
                 <input asp-for="Requirments" class="form-control" />
                 <span asp-validation-for="Requirments" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="EmployerId" value="HELLO :D" />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-            @Html.AntiForgeryToken()
         </form>
     </div>
 </div>

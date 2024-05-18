@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Presentation.Models;
 using Presentation.Utilities;
 
@@ -118,7 +119,6 @@ namespace Presentation.Controllers
         [Authorize]
         public async Task<IActionResult> Upload(IFormFile cvFile, string employerId)
         {
-            
             if (!ModelState.IsValid)
             {
                 TempData["ErrorMessage"] = "Only PDF and DOCX files are allowed.";
@@ -143,13 +143,18 @@ namespace Presentation.Controllers
                 return RedirectToAction("Index", "Jobs");
             }
 
-            //Get user ID and the save location
             var user = await _userManager.GetUserAsync(User);
-
-            if (user == null)
+            if (user == null)//Get user ID, also doubles as a check in case bypassing authorization
             {
                 TempData["ErrorMessage"] = "An error has occurd";
                 return RedirectToAction("Index", "Home");
+            }
+            
+            var employerKey = _keyRepository.GetKeyById(employerId);
+            if (employerKey.PublicKey == null)//Getting employers public key for hybrid encryption
+            {
+                TempData["ErrorMessage"] = "Employer's encryption key not found.";
+                return RedirectToAction("Index", "Jobs");
             }
 
             var uploadsFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "Data");
@@ -160,12 +165,12 @@ namespace Presentation.Controllers
                 Directory.CreateDirectory(uploadsFolder);
             }
 
+            //Giving the file a unique name and concat the file with the directory
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + cvFile.FileName;
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
             try
             {
-                //Creating digital signature
                 byte[] fileBytes;
                 using (var ms = new MemoryStream())
                 {
@@ -174,7 +179,19 @@ namespace Presentation.Controllers
                 }
 
                 var e = new Encryption();
+
+                // Encrypting File using hybrid encryption
+                // HAS TO BE DONE BFORE DIGITAL SIGNATURE?!
+                MemoryStream encryptedStream = e.HybridEncrypt(fileBytes, employerKey.PublicKey);
+
                 var userPrivateKey = _keyRepository.GetKeyById(user.Id);
+                if (userPrivateKey.PrivateKey == null)//Getting users private key for the signature
+                {
+                    TempData["ErrorMessage"] = "Employer's encryption key not found.";
+                    return RedirectToAction("Index", "Jobs");
+                }
+
+                //Creating digital signature
                 byte[] signature = e.DigitalSign(fileBytes, userPrivateKey.PrivateKey);
 
                 CV cv = new CV()
@@ -185,13 +202,14 @@ namespace Presentation.Controllers
                     DigtalSignature = signature,
                 };
 
-                //Save cv
+                //Save CV
                 _cvRepository.AddCv(cv);
 
-                //Save file
+                // Save the encrypted file
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await cvFile.CopyToAsync(fileStream);
+                    encryptedStream.Position = 0;
+                    await encryptedStream.CopyToAsync(fileStream);
                 }
 
                 TempData["SuccessMessage"] = "CV uploaded successfully!";
@@ -251,41 +269,67 @@ namespace Presentation.Controllers
         }// Close File type Validation
 
         [Authorize(Roles = "Admin,Manager,Employer")]
-        public IActionResult Download(int cvId)
+        public async Task<IActionResult> Download(int cvId)
         {
             var cv = _cvRepository.GetAllCv().SingleOrDefault(x => x.Id == cvId);
-
-            if (cv == null)
+            if (cv == null) //Find the CV the employer wants to download
             {
                 TempData["ErrorMessage"] = "An error occurd while downloading file";
                 return RedirectToAction("EmployerCvs", "Cv");
             }
 
+            //Concat the file name and the directory
             var uploadsFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "Data");
             var pathToCv = uploadsFolder + "\\" + cv.FileName;
 
+            //Check if the file exists
             if (!System.IO.File.Exists(pathToCv))
             {
                 TempData["ErrorMessage"] = "File does not exist.";
                 return RedirectToAction("EmployerCvs", "Cv");
             }
 
-            //Validating Digital Signature
-            byte[] fileAsBytes = System.IO.File.ReadAllBytes(pathToCv);
-
-            var e = new Encryption();
-            var userKey = _keyRepository.GetKeyById(cv.UserId);
-
-            bool verifySignature = e.DigitalVerification(fileAsBytes, cv.DigtalSignature, userKey.PublicKey);
-            if (!verifySignature) 
+            try
             {
-                TempData["ErrorMessage"] = "File signature could not be verified.";
-                return RedirectToAction("EmployerCvs", "Cv");
+                //Save encrypted file bytes
+                byte[] encryptedFileBytes = System.IO.File.ReadAllBytes(pathToCv);
+
+                var userKey = _keyRepository.GetKeyById(cv.UserId);
+                if (userKey.PublicKey == null) //Collect Submitees' public key for digital signature
+                {
+                    TempData["ErrorMessage"] = "User's encryption key not found.";
+                    return RedirectToAction("EmployerCvs", "Cv");
+                }
+
+                var e = new Encryption();
+                bool verifySignature = e.DigitalVerification(encryptedFileBytes, cv.DigtalSignature, userKey.PublicKey);
+                if (!verifySignature)//Validating Digital Signature
+                {
+                    TempData["ErrorMessage"] = "File signature could not be verified.";
+                    return RedirectToAction("EmployerCvs", "Cv");
+                }
+
+                // Retrieve employer's private key for decryption
+                var employer = await _userManager.FindByIdAsync(cv.EmployerId);
+                var employerKey = _keyRepository.GetKeyById(employer.Id);
+                if (employerKey.PrivateKey == null) //Check if emplyer has a Private key
+                {
+                    TempData["ErrorMessage"] = "Employer's encryption key not found.";
+                    return RedirectToAction("EmployerCvs", "Cv");
+                }
+
+                // Decrypt the file
+                MemoryStream decryptedStream = e.HybridDecrypt(encryptedFileBytes, employerKey.PrivateKey);
+                //Remove GUID from the file name
+                string fileName = cv.FileName.Substring(37);
+                //Download file
+                return File(decryptedStream, "application/octet-stream", fileName);
             }
-
-            string fileName = cv.FileName.Substring(37);
-
-            return File(fileAsBytes, "application/octet-stream", fileName);
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "An error occurred while downloading the file.";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
     }

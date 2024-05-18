@@ -47,7 +47,6 @@ namespace Presentation.Controllers
             return View();
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost] //Save Data filled in
         [Authorize(Roles = "Admin,Manager,Employer")]
         public async Task<IActionResult> Create(JobViewModel j) 
@@ -81,6 +80,17 @@ namespace Presentation.Controllers
                     return View();
                 }
             }
+            
+            // Inspect model state errors
+            /*
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            foreach (var error in errors)
+            {
+                // Log the error (you can also use a logger to log the error)
+                System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+            }*/
+
+            TempData["ErrorMessage"] = "Please fill in the empty fields";
             return View();
         }
 

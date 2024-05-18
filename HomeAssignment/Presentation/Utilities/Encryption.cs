@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 
 namespace Presentation.Utilities
 {
@@ -39,12 +40,10 @@ namespace Presentation.Utilities
 
         public MemoryStream HybridEncrypt(byte[] data, string publicKey)
         {
-
             Aes myAlg = Aes.Create();
 
             myAlg.GenerateKey();
             myAlg.GenerateIV();
-
 
             MemoryStream msIn = new MemoryStream(data); //Point A
             msIn.Position = 0;//ascertain myself that the CryptoStream (later on) will start from position 0
@@ -69,13 +68,35 @@ namespace Presentation.Utilities
 
             return output;
         }
-
-        /*
-        public MemoryStream HybridDecrypt(byte[] data, string publicKey)
+        
+        public MemoryStream HybridDecrypt(byte[] data, string privateKey)
         {
+            MemoryStream msOut = new MemoryStream(data);
+            msOut.Position = 0;
+         
+            byte[] encryptedKey = new byte[128];
+            byte[] encryptedIv = new byte[128];
 
+            msOut.Read(encryptedKey, 0, encryptedKey.Length);
+            msOut.Read(encryptedIv, 0, encryptedIv.Length);
+
+            byte[] aesKey = AsymmetricDecrypt(encryptedKey, privateKey);
+            byte[] aesIv = AsymmetricDecrypt(encryptedIv, privateKey);
+
+            Aes myAlg = Aes.Create();
+            myAlg.Key = aesKey;
+            myAlg.IV = aesIv;
+
+            MemoryStream msIn = new MemoryStream();
+
+            using (CryptoStream myCryptoStream = new CryptoStream(msOut, myAlg.CreateDecryptor(), CryptoStreamMode.Read))
+            {
+                myCryptoStream.CopyTo(msIn);
+            }
+            msIn.Position = 0;
+
+            return msIn;
         }
-        */
 
         public byte[] DigitalSign(byte[] data, string privateKey)
         {

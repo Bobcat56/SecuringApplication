@@ -7,6 +7,6 @@
         public required string Description { get; set; }
         public required string Requirments { get; set; }
         public DateOnly PostingDate { get; set; }
-        public required string EmployerId { get; set; }
+        public string EmployerId { get; set; }
     }
 }
