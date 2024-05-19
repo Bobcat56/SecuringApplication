@@ -1,0 +1,288 @@
+2024-05-19 01:33:59.804 +02:00 [INF] User profile is available. Using 'C:\Users\Andre\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-05-19 01:34:01.083 +02:00 [INF] Executed DbCommand (53ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:01.127 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:01.130 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:01.132 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:01.134 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:01.136 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:01.147 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-05-19 01:34:01.420 +02:00 [INF] Now listening on: https://localhost:7088
+2024-05-19 01:34:01.421 +02:00 [INF] Now listening on: http://localhost:5294
+2024-05-19 01:34:01.427 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-19 01:34:01.428 +02:00 [INF] Hosting environment: Development
+2024-05-19 01:34:01.430 +02:00 [INF] Content root path: F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation
+2024-05-19 01:34:04.262 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/ - null null
+2024-05-19 01:34:04.500 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2024-05-19 01:34:04.530 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-05-19 01:34:04.548 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-05-19 01:34:04.551 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:04.559 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-05-19 01:34:04.565 +02:00 [INF] Executing endpoint 'Presentation.Controllers.HomeController.Index (Presentation)'
+2024-05-19 01:34:04.573 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Presentation.Controllers.HomeController (Presentation).
+2024-05-19 01:34:04.579 +02:00 [INF] Executing ViewResult, running view Index.
+2024-05-19 01:34:04.677 +02:00 [INF] Executed ViewResult - view Index executed in 97.7207ms.
+2024-05-19 01:34:04.680 +02:00 [INF] Executed action Presentation.Controllers.HomeController.Index (Presentation) in 106.4738ms
+2024-05-19 01:34:04.681 +02:00 [INF] Executed endpoint 'Presentation.Controllers.HomeController.Index (Presentation)'
+2024-05-19 01:34:04.686 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/ - 200 null text/html; charset=utf-8 428.537ms
+2024-05-19 01:34:04.740 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/lib/jquery/dist/jquery.min.js - null null
+2024-05-19 01:34:04.740 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2024-05-19 01:34:04.741 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:04.740 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - null null
+2024-05-19 01:34:04.740 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Presentation.styles.css?v=xFObuMcFudJY0N23opOVMYwxN5GhVnce5ebayZveqnU - null null
+2024-05-19 01:34:04.746 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2024-05-19 01:34:04.752 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - null null
+2024-05-19 01:34:04.757 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:04.769 +02:00 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2024-05-19 01:34:04.769 +02:00 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2024-05-19 01:34:04.769 +02:00 [INF] The file /css/site.css was not modified
+2024-05-19 01:34:04.769 +02:00 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2024-05-19 01:34:04.770 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 29.4832ms
+2024-05-19 01:34:04.770 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/lib/bootstrap/dist/css/bootstrap.min.css - 304 null text/css 30.1322ms
+2024-05-19 01:34:04.770 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/lib/jquery/dist/jquery.min.js - 304 null text/javascript 29.7983ms
+2024-05-19 01:34:04.770 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - 304 null text/css 30.0921ms
+2024-05-19 01:34:04.774 +02:00 [INF] The file /Presentation.styles.css was not modified
+2024-05-19 01:34:04.770 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 304 null text/javascript 24.3187ms
+2024-05-19 01:34:04.770 +02:00 [INF] The file /js/site.js was not modified
+2024-05-19 01:34:04.777 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/js/site.js?v=hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo - 304 null text/javascript 25.0496ms
+2024-05-19 01:34:04.777 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Presentation.styles.css?v=xFObuMcFudJY0N23opOVMYwxN5GhVnce5ebayZveqnU - 304 null text/css 36.3544ms
+2024-05-19 01:34:04.814 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.9682ms
+2024-05-19 01:34:06.431 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7088/Identity/Account/Logout?returnUrl=%2F - application/x-www-form-urlencoded 225
+2024-05-19 01:34:06.439 +02:00 [INF] Executing endpoint '/Account/Logout'
+2024-05-19 01:34:06.448 +02:00 [INF] Route matched with {page = "/Account/Logout", area = "Identity", action = "", controller = ""}. Executing page /Account/Logout
+2024-05-19 01:34:06.465 +02:00 [INF] Executing handler method Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal.LogoutModel.OnPost - ModelState is "Valid"
+2024-05-19 01:34:06.468 +02:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2024-05-19 01:34:06.469 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2024-05-19 01:34:06.469 +02:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2024-05-19 01:34:06.469 +02:00 [INF] User logged out.
+2024-05-19 01:34:06.469 +02:00 [INF] Executed handler method OnPost, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2024-05-19 01:34:06.470 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2024-05-19 01:34:06.470 +02:00 [INF] Executed page /Account/Logout in 21.6314ms
+2024-05-19 01:34:06.470 +02:00 [INF] Executed endpoint '/Account/Logout'
+2024-05-19 01:34:06.470 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7088/Identity/Account/Logout?returnUrl=%2F - 302 0 null 40.0661ms
+2024-05-19 01:34:06.475 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/ - null null
+2024-05-19 01:34:06.477 +02:00 [INF] Executing endpoint 'Presentation.Controllers.HomeController.Index (Presentation)'
+2024-05-19 01:34:06.477 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Presentation.Controllers.HomeController (Presentation).
+2024-05-19 01:34:06.478 +02:00 [INF] Executing ViewResult, running view Index.
+2024-05-19 01:34:06.487 +02:00 [INF] Executed ViewResult - view Index executed in 10.0485ms.
+2024-05-19 01:34:06.488 +02:00 [INF] Executed action Presentation.Controllers.HomeController.Index (Presentation) in 10.3839ms
+2024-05-19 01:34:06.488 +02:00 [INF] Executed endpoint 'Presentation.Controllers.HomeController.Index (Presentation)'
+2024-05-19 01:34:06.488 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/ - 200 null text/html; charset=utf-8 13.3948ms
+2024-05-19 01:34:06.523 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:06.525 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:06.526 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 1.2854ms
+2024-05-19 01:34:06.532 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 8.6465ms
+2024-05-19 01:34:07.987 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Identity/Account/Login - null null
+2024-05-19 01:34:07.991 +02:00 [INF] Executing endpoint '/Account/Login'
+2024-05-19 01:34:07.997 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2024-05-19 01:34:07.999 +02:00 [INF] Executing handler method Presentation.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2024-05-19 01:34:07.999 +02:00 [INF] AuthenticationScheme: Identity.External signed out.
+2024-05-19 01:34:08.000 +02:00 [INF] Executed handler method OnGetAsync, returned result .
+2024-05-19 01:34:08.002 +02:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2024-05-19 01:34:08.002 +02:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-05-19 01:34:08.030 +02:00 [INF] Executed page /Account/Login in 33.1933ms
+2024-05-19 01:34:08.030 +02:00 [INF] Executed endpoint '/Account/Login'
+2024-05-19 01:34:08.031 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Identity/Account/Login - 200 null text/html; charset=utf-8 44.2741ms
+2024-05-19 01:34:08.075 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:08.075 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 1.1418ms
+2024-05-19 01:34:08.104 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:08.114 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 10.5687ms
+2024-05-19 01:34:15.520 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7088/Identity/Account/Login - application/x-www-form-urlencoded 260
+2024-05-19 01:34:15.522 +02:00 [INF] Executing endpoint '/Account/Login'
+2024-05-19 01:34:15.522 +02:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2024-05-19 01:34:15.530 +02:00 [INF] Executing handler method Presentation.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2024-05-19 01:34:15.546 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-05-19 01:34:15.650 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__user_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[Id], [a].[ClaimType], [a].[ClaimValue], [a].[UserId]
+FROM [AspNetUserClaims] AS [a]
+WHERE [a].[UserId] = @__user_Id_0
+2024-05-19 01:34:15.654 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-05-19 01:34:15.656 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedName_0
+2024-05-19 01:34:15.659 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__role_Id_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a].[ClaimType], [a].[ClaimValue]
+FROM [AspNetRoleClaims] AS [a]
+WHERE [a].[RoleId] = @__role_Id_0
+2024-05-19 01:34:15.662 +02:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2024-05-19 01:34:15.664 +02:00 [INF] User logged in.
+2024-05-19 01:34:15.665 +02:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2024-05-19 01:34:15.666 +02:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2024-05-19 01:34:15.666 +02:00 [INF] Executed page /Account/Login in 143.7903ms
+2024-05-19 01:34:15.666 +02:00 [INF] Executed endpoint '/Account/Login'
+2024-05-19 01:34:15.666 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7088/Identity/Account/Login - 302 0 null 146.4721ms
+2024-05-19 01:34:15.671 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/ - null null
+2024-05-19 01:34:15.673 +02:00 [INF] Executing endpoint 'Presentation.Controllers.HomeController.Index (Presentation)'
+2024-05-19 01:34:15.673 +02:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Presentation.Controllers.HomeController (Presentation).
+2024-05-19 01:34:15.674 +02:00 [INF] Executing ViewResult, running view Index.
+2024-05-19 01:34:15.675 +02:00 [INF] Executed ViewResult - view Index executed in 1.7668ms.
+2024-05-19 01:34:15.676 +02:00 [INF] Executed action Presentation.Controllers.HomeController.Index (Presentation) in 2.3189ms
+2024-05-19 01:34:15.676 +02:00 [INF] Executed endpoint 'Presentation.Controllers.HomeController.Index (Presentation)'
+2024-05-19 01:34:15.676 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/ - 200 null text/html; charset=utf-8 5.6018ms
+2024-05-19 01:34:15.715 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:15.716 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:15.717 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 0.6801ms
+2024-05-19 01:34:15.722 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.4767ms
+2024-05-19 01:34:16.785 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Cv/UserCvs - null null
+2024-05-19 01:34:16.792 +02:00 [INF] Executing endpoint 'Presentation.Controllers.CvController.UserCvs (Presentation)'
+2024-05-19 01:34:16.795 +02:00 [INF] Route matched with {action = "UserCvs", controller = "Cv", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UserCvs() on controller Presentation.Controllers.CvController (Presentation).
+2024-05-19 01:34:16.800 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2024-05-19 01:34:16.812 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[DigtalSignature], [c].[EmployerId], [c].[FileName], [c].[UserId]
+FROM [CVs] AS [c]
+WHERE [c].[UserId] = @__userId_0
+2024-05-19 01:34:16.814 +02:00 [INF] The UserCvs page was succesfully loaded.
+2024-05-19 01:34:16.816 +02:00 [INF] Executing ViewResult, running view UserCvs.
+2024-05-19 01:34:16.819 +02:00 [INF] Executed ViewResult - view UserCvs executed in 3.0085ms.
+2024-05-19 01:34:16.819 +02:00 [INF] Executed action Presentation.Controllers.CvController.UserCvs (Presentation) in 24.5729ms
+2024-05-19 01:34:16.819 +02:00 [INF] Executed endpoint 'Presentation.Controllers.CvController.UserCvs (Presentation)'
+2024-05-19 01:34:16.819 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Cv/UserCvs - 200 null text/html; charset=utf-8 34.2262ms
+2024-05-19 01:34:16.849 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:16.849 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:16.850 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 1.0187ms
+2024-05-19 01:34:16.856 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.3447ms
+2024-05-19 01:34:17.836 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Cv/EmployerCvs - null null
+2024-05-19 01:34:17.840 +02:00 [INF] Executing endpoint 'Presentation.Controllers.CvController.EmployerCvs (Presentation)'
+2024-05-19 01:34:17.842 +02:00 [INF] Route matched with {action = "EmployerCvs", controller = "Cv", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] EmployerCvs() on controller Presentation.Controllers.CvController (Presentation).
+2024-05-19 01:34:17.846 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2024-05-19 01:34:17.853 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__employerId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[DigtalSignature], [c].[EmployerId], [c].[FileName], [c].[UserId]
+FROM [CVs] AS [c]
+WHERE [c].[EmployerId] = @__employerId_0
+2024-05-19 01:34:17.871 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2024-05-19 01:34:17.877 +02:00 [INF] Page of employer Cvs was succesfully loaded
+2024-05-19 01:34:17.878 +02:00 [INF] Executing ViewResult, running view EmployerCvs.
+2024-05-19 01:34:17.884 +02:00 [INF] Executed ViewResult - view EmployerCvs executed in 6.7467ms.
+2024-05-19 01:34:17.884 +02:00 [INF] Executed action Presentation.Controllers.CvController.EmployerCvs (Presentation) in 42.3556ms
+2024-05-19 01:34:17.884 +02:00 [INF] Executed endpoint 'Presentation.Controllers.CvController.EmployerCvs (Presentation)'
+2024-05-19 01:34:17.884 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Cv/EmployerCvs - 200 null text/html; charset=utf-8 48.7031ms
+2024-05-19 01:34:17.915 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:17.916 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:17.916 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 0.9417ms
+2024-05-19 01:34:17.922 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 6.7868ms
+2024-05-19 01:34:19.344 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7088/CV/Download - multipart/form-data; boundary=----WebKitFormBoundaryCGQZT7mCfYKI8U7O 448
+2024-05-19 01:34:19.346 +02:00 [INF] Executing endpoint 'Presentation.Controllers.CvController.Download (Presentation)'
+2024-05-19 01:34:19.349 +02:00 [INF] Route matched with {action = "Download", controller = "Cv", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Download(Int32) on controller Presentation.Controllers.CvController (Presentation).
+2024-05-19 01:34:19.362 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__cvId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [c].[Id], [c].[DigtalSignature], [c].[EmployerId], [c].[FileName], [c].[UserId]
+FROM [CVs] AS [c]
+WHERE [c].[Id] = @__cvId_0
+2024-05-19 01:34:19.372 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[Id] = @__p_0
+2024-05-19 01:34:19.378 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [e].[UserId], [e].[PrivateKey], [e].[PublicKey]
+FROM [EncryptionKeys] AS [e]
+WHERE [e].[UserId] = @__userId_0
+2024-05-19 01:34:19.391 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [e].[UserId], [e].[PrivateKey], [e].[PublicKey]
+FROM [EncryptionKeys] AS [e]
+WHERE [e].[UserId] = @__userId_0
+2024-05-19 01:34:19.393 +02:00 [INF] Executing FileContentResult, sending file with download name 'Both.docx' ...
+2024-05-19 01:34:19.398 +02:00 [INF] Executed action Presentation.Controllers.CvController.Download (Presentation) in 48.2132ms
+2024-05-19 01:34:19.398 +02:00 [INF] Executed endpoint 'Presentation.Controllers.CvController.Download (Presentation)'
+2024-05-19 01:34:19.398 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7088/CV/Download - 200 13451 application/octet-stream 54.2201ms
+2024-05-19 01:34:21.415 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Jobs - null null
+2024-05-19 01:34:21.416 +02:00 [INF] Executing endpoint 'Presentation.Controllers.JobsController.Index (Presentation)'
+2024-05-19 01:34:21.417 +02:00 [INF] Route matched with {action = "Index", controller = "Jobs", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Presentation.Controllers.JobsController (Presentation).
+2024-05-19 01:34:21.420 +02:00 [INF] Jobs/Index page was loaded
+2024-05-19 01:34:21.421 +02:00 [INF] Executing ViewResult, running view Index.
+2024-05-19 01:34:21.432 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [j].[Id], [j].[Title], [j].[Description], [j].[Requirments], [j].[PostingDate], [j].[EmployerId]
+FROM [Jobs] AS [j]
+2024-05-19 01:34:21.436 +02:00 [INF] Executed ViewResult - view Index executed in 15.6918ms.
+2024-05-19 01:34:21.437 +02:00 [INF] Executed action Presentation.Controllers.JobsController.Index (Presentation) in 19.4898ms
+2024-05-19 01:34:21.437 +02:00 [INF] Executed endpoint 'Presentation.Controllers.JobsController.Index (Presentation)'
+2024-05-19 01:34:21.437 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Jobs - 200 null text/html; charset=utf-8 22.8002ms
+2024-05-19 01:34:21.469 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:21.469 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:21.470 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 1.0395ms
+2024-05-19 01:34:21.479 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 10.1247ms
+2024-05-19 01:34:24.128 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Jobs/Delete/14 - null null
+2024-05-19 01:34:24.130 +02:00 [INF] Executing endpoint 'Presentation.Controllers.JobsController.Delete (Presentation)'
+2024-05-19 01:34:24.131 +02:00 [INF] Route matched with {action = "Delete", controller = "Jobs", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Delete(Int32) on controller Presentation.Controllers.JobsController (Presentation).
+2024-05-19 01:34:24.137 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [j].[Id], [j].[Description], [j].[EmployerId], [j].[PostingDate], [j].[Requirments], [j].[Title]
+FROM [Jobs] AS [j]
+WHERE [j].[Id] = @__id_0
+2024-05-19 01:34:24.198 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+DELETE FROM [Jobs]
+OUTPUT 1
+WHERE [Id] = @p0;
+2024-05-19 01:34:24.205 +02:00 [INF] USer succesfully deleted a job listing
+2024-05-19 01:34:24.206 +02:00 [INF] Executing RedirectResult, redirecting to /Jobs.
+2024-05-19 01:34:24.207 +02:00 [INF] Executed action Presentation.Controllers.JobsController.Delete (Presentation) in 75.9935ms
+2024-05-19 01:34:24.207 +02:00 [INF] Executed endpoint 'Presentation.Controllers.JobsController.Delete (Presentation)'
+2024-05-19 01:34:24.207 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Jobs/Delete/14 - 302 0 null 79.7598ms
+2024-05-19 01:34:24.211 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/Jobs - null null
+2024-05-19 01:34:24.213 +02:00 [INF] Executing endpoint 'Presentation.Controllers.JobsController.Index (Presentation)'
+2024-05-19 01:34:24.213 +02:00 [INF] Route matched with {action = "Index", controller = "Jobs", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Presentation.Controllers.JobsController (Presentation).
+2024-05-19 01:34:24.215 +02:00 [INF] Jobs/Index page was loaded
+2024-05-19 01:34:24.216 +02:00 [INF] Executing ViewResult, running view Index.
+2024-05-19 01:34:24.219 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [j].[Id], [j].[Title], [j].[Description], [j].[Requirments], [j].[PostingDate], [j].[EmployerId]
+FROM [Jobs] AS [j]
+2024-05-19 01:34:24.221 +02:00 [INF] Executed ViewResult - view Index executed in 5.6826ms.
+2024-05-19 01:34:24.222 +02:00 [INF] Executed action Presentation.Controllers.JobsController.Index (Presentation) in 8.7265ms
+2024-05-19 01:34:24.222 +02:00 [INF] Executed endpoint 'Presentation.Controllers.JobsController.Index (Presentation)'
+2024-05-19 01:34:24.222 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/Jobs - 200 null text/html; charset=utf-8 11.0699ms
+2024-05-19 01:34:24.258 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_vs/browserLink - null null
+2024-05-19 01:34:24.259 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - null null
+2024-05-19 01:34:24.259 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_framework/aspnetcore-browser-refresh.js - 200 13760 application/javascript; charset=utf-8 0.713ms
+2024-05-19 01:34:24.265 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7088/_vs/browserLink - 200 null text/javascript; charset=UTF-8 7.143ms

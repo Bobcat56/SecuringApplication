@@ -1,0 +1,15 @@
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\bin\Debug\net8.0\Common.deps.json
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\bin\Debug\net8.0\Common.runtimeconfig.json
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\bin\Debug\net8.0\Common.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\bin\Debug\net8.0\Common.pdb
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.csproj.AssemblyReference.cache
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.sourcelink.json
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\refint\Common.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.pdb
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\Common.genruntimeconfig.cache
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignmnetP2\Common\obj\Debug\net8.0\ref\Common.dll

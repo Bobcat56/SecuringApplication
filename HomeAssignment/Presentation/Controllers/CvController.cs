@@ -17,18 +17,21 @@ namespace Presentation.Controllers
         private readonly EncryptionKeyRepository _keyRepository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ILogger<CvController> _logger;
 
         //Controller
         public CvController(
             CvRepository cvRepository,
             EncryptionKeyRepository keyRepository,
             UserManager<IdentityUser> userManager, 
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            ILogger<CvController> logger)
         {
             _cvRepository = cvRepository;
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
             _keyRepository = keyRepository;
+            _logger = logger;
         }
 
         [HttpGet] //Fetch page for users submitted cvs
@@ -39,6 +42,7 @@ namespace Presentation.Controllers
 
             if (user == null)
             {
+                _logger.LogError("User is null");
                 TempData["ErrorMessage"] = "An error occurd while fetching cvs";
                 return RedirectToAction("Index", "Home");
             }
@@ -61,13 +65,15 @@ namespace Presentation.Controllers
                         UserEmail = userEmail.Email,
                         EmployerEmail = employerEmail.Email
                     };
-
+                    _logger.LogInformation("Succesfully added CV's into a list");
                     cvViewModels.Add(cvViewModel);
                 }
+                _logger.LogInformation("The UserCvs page was succesfully loaded.");
                 return View(cvViewModels);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "An issue was encountered when fetching cvs");
                 TempData["ErrorMessage"] = "An error occurd while fetching cvs";
                 return RedirectToAction("Index", "Home");
             }
@@ -81,6 +87,7 @@ namespace Presentation.Controllers
 
             if (user == null)
             {
+                _logger.LogError("User is null");
                 TempData["ErrorMessage"] = "An error occurd.";
                 return RedirectToAction("Index", "Home");
             }
@@ -105,10 +112,12 @@ namespace Presentation.Controllers
 
                     cvViewModels.Add(cvViewModel);
                 }
+                _logger.LogInformation("Page of employer Cvs was succesfully loaded");
                 return View(cvViewModels);
             }
-            catch (Exception )
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error encountered while creating a list of cvs for the employer");
                 TempData["ErrorMessage"] = "An error occurd while fetching cvs";
                 return RedirectToAction("Index", "Home");
             }
@@ -121,24 +130,28 @@ namespace Presentation.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logger.LogError("User attempted to submit a file with an incorrect file extension");
                 TempData["ErrorMessage"] = "Only PDF and DOCX files are allowed.";
                 return RedirectToAction("Index", "Jobs");
             }
 
             if (!IsValidFileType(cvFile))
             {
+                _logger.LogError("User attempted to submit a file which didn't add up with the listed magic numbers of pdf or docx files");
                 TempData["ErrorMessage"] = "Only PDF and DOCX files are allowed.";
                 return RedirectToAction("Index", "Jobs");
             }
 
             if (cvFile == null || cvFile.Length <= 0)
             {
+                _logger.LogError("User attempted to upload an empty file or no file");
                 TempData["ErrorMessage"] = "Please select a file to upload.";
                 return RedirectToAction("Index", "Jobs");
             }
 
             if (cvFile.Length > 10 * 1024 * 1024)
             {
+                _logger.LogError($"User attempted to upload a file larger than 10MB, {cvFile.Length}");
                 TempData["ErrorMessage"] = "File size cannot be greater than 10MB.";
                 return RedirectToAction("Index", "Jobs");
             }
@@ -146,6 +159,7 @@ namespace Presentation.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogError("User was not logged in.");
                 TempData["ErrorMessage"] = "An error has occurred";
                 return RedirectToAction("Index", "Home");
             }
@@ -153,6 +167,7 @@ namespace Presentation.Controllers
             var employerKey = _keyRepository.GetKeyById(employerId);
             if (employerKey.PublicKey == null)
             {
+                _logger.LogError("Could not fetch the employers public key");
                 TempData["ErrorMessage"] = "Employer's encryption key not found.";
                 return RedirectToAction("Index", "Jobs");
             }
@@ -160,6 +175,7 @@ namespace Presentation.Controllers
             var uploadsFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "Data");
             if (!Directory.Exists(uploadsFolder))
             {
+                _logger.LogInformation($"{uploadsFolder} directory was created");
                 Directory.CreateDirectory(uploadsFolder);
             }
 
@@ -183,6 +199,7 @@ namespace Presentation.Controllers
                 var userPrivateKey = _keyRepository.GetKeyById(user.Id);
                 if (userPrivateKey.PrivateKey == null)
                 {
+                    _logger.LogInformation($"{userPrivateKey} does not exist");
                     TempData["ErrorMessage"] = "User's encryption key not found.";
                     return RedirectToAction("Index", "Jobs");
                 }
@@ -199,11 +216,13 @@ namespace Presentation.Controllers
                 };
 
                 // Save CV
+                _logger.LogInformation("New cv uploaded");
                 _cvRepository.AddCv(cv);
 
                 // Save the encrypted file
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
+                    _logger.LogInformation("File saved");
                     encryptedStream.Position = 0;
                     await encryptedStream.CopyToAsync(fileStream);
                 }
@@ -211,8 +230,9 @@ namespace Presentation.Controllers
                 TempData["SuccessMessage"] = "CV uploaded successfully!";
                 return RedirectToAction("Index", "Jobs");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "An error occured while saving the file or saving the cv to the database");
                 TempData["ErrorMessage"] = "An error occurred while uploading the file";
                 return RedirectToAction("Index", "Jobs");
             }
@@ -279,6 +299,7 @@ namespace Presentation.Controllers
 
             if (!System.IO.File.Exists(pathToCv))
             {
+                _logger.LogError($"File {pathToCv}, does not exist");
                 TempData["ErrorMessage"] = "File does not exist.";
                 return RedirectToAction("EmployerCvs", "Cv");
             }
@@ -293,6 +314,7 @@ namespace Presentation.Controllers
                 var employerKey = _keyRepository.GetKeyById(employer.Id);
                 if (employerKey.PrivateKey == null)
                 {
+                    _logger.LogError($"{employer.Id}, does not have a private key");
                     TempData["ErrorMessage"] = "Employer's encryption key not found.";
                     return RedirectToAction("EmployerCvs", "Cv");
                 }
@@ -304,6 +326,7 @@ namespace Presentation.Controllers
                 var userKey = _keyRepository.GetKeyById(cv.UserId);
                 if (userKey.PublicKey == null)
                 {
+                    _logger.LogError($"{cv.UserId}, does not have a private key");
                     TempData["ErrorMessage"] = "User's encryption key not found.";
                     return RedirectToAction("EmployerCvs", "Cv");
                 }
@@ -312,6 +335,7 @@ namespace Presentation.Controllers
                 bool verifySignature = e.DigitalVerification(decryptedFileBytes, cv.DigtalSignature, userKey.PublicKey);
                 if (!verifySignature)
                 {
+                    _logger.LogError($"{cv.DigtalSignature}, could not be verified");
                     TempData["ErrorMessage"] = "File signature could not be verified.";
                     return RedirectToAction("EmployerCvs", "Cv");
                 }
@@ -320,8 +344,9 @@ namespace Presentation.Controllers
 
                 return File(decryptedFileBytes, "application/octet-stream", fileName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError($"{ex}, error occured while downloading file");
                 TempData["ErrorMessage"] = "An error occurred while downloading the file.";
                 return RedirectToAction("Index", "Home");
             }

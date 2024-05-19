@@ -16,7 +16,7 @@ namespace Common.Models
         public int Id { get; set; }
 
         [ForeignKey("IdentityUser")]
-        public required string UserId { get; set; }
+        public string UserId { get; set; }
         public virtual IdentityUser IdentityUser { get; set; }
 
         public required string ActivityType { get; set; }

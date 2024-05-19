@@ -301,3 +301,14 @@ F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplic
 F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
 F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.MicrosoftAccount.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.AspNetCore.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Sinks.File.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Sinks.MSSqlServer.dll
+F:\School\Lvl 6.2A\Term_2\Securing Applications\Home assignment 2\SecuringApplication\HomeAssignment\Presentation\bin\Debug\net8.0\Serilog.Sinks.PeriodicBatching.dll
